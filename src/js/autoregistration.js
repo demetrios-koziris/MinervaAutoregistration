@@ -7,6 +7,7 @@ let devMode = !('update_url' in chrome.runtime.getManifest());
 let logForDebug = ( devMode ? console.log.bind(window.console) : function(){} );
 logForDebug("Minerva Autoregistration Debug mode is ON");
 
+
 var notpermittedMessage = 'Minerva indicates that you are not permitted to register at this time or that this term is not available for registration processing. Please check Minerva to verify this.';
 var notloggedinMessage = 'You must be already signed in to Minvera in order to use this feature. Please sign in and then return to this page.';
 var defaultErrorMessage = 'Minerva Autoregistration encountered an error while trying to run.';
@@ -14,6 +15,7 @@ var courseParsingError = 'McGill Autoregistation encountered an error while tryi
 var initializationError = 'McGill Autoregistation encountered an error trying to find this course in Minerva. The CRN codes may not be associated with this course, the course or the CRN codes may not exist, or there may be some other error.';
 var courseRegistrationError = 'McGill Autoregistation encountered an error while trying to register you for this course.';
 var crnMaxMessage = 'There is a maximum of 10 CRN codes that can be submitted in one registration. McGill Enhanced will attempt registration for the first 10 CRN codes detected.';
+var pleaseReloadErrorMessage = 'ERROR ENCOUNTERED! Please Reload Minerva Autoregistration!';
 var minervaLogin = 'https://horizon.mcgill.ca/pban1/twbkwbis.P_WWWLogin';
 var attemptIntervalTime = 3;
 var nextAttemptInterval;
@@ -212,7 +214,7 @@ function generateAttemptRegistrationFunction(course, minervaCourseURL) {
 			}
 			catch (err) {
 				console.log(err.stack);
-				logToResults('ERROR ENCOUNTERED! PLEASE RELOAD MINVERVA AUTOREGISTRATION!</br>' + err.message, true);
+				logToResults('<br>' + pleaseReloadErrorMessage + '<br>' + err.message, true);
 				alert(courseRegistrationError + '\nERROR: ' + err.message);
 			}
 		});
@@ -222,7 +224,7 @@ function generateAttemptRegistrationFunction(course, minervaCourseURL) {
 
 function setNextAttempt(course, minervaCourseURL) {
 	let currentTime = new Date().getTime();
-	let nextAttemptTime = currentTime + attemptIntervalTime*60*1000;
+	let nextAttemptTime = currentTime + attemptIntervalTime*60*1000 + (Math.floor(Math.random()*60)-30)*1000;
   	nextAttemptInterval = setInterval(generateWaitForNextAttemptFunction(nextAttemptTime, course, minervaCourseURL), 1000);
 }
 
@@ -273,7 +275,7 @@ function register(course) {
 			}
 			else if (infotext.includes('You are not permitted to register at this time.') ||
 				     infotext.includes('Term not available for Registration processing.')) {
-				redirect(notpermittedMessage, minervaRegister);
+				throw new MyError(notpermittedMessage);
 			}
 			else {
 				const crnCodes = course.crns;
@@ -295,9 +297,10 @@ function register(course) {
 				window.open(regURL, '_blank').focus();
 			}
 		}
-		catch(err) {
+		catch (err) {
 			console.log(err.stack);
-			redirect(courseRegistrationError, minervaRegister);
+			logToResults('<br>' + pleaseReloadErrorMessage + '<br>' + err.message, true);
+			alert(courseRegistrationError + '\nERROR: ' + err.message);
 		}
 	});
 }
