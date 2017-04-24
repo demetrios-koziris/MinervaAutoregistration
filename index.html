@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <link rel="stylesheet" type="text/css" href="stylesheets/mar.css" media="screen">
+
+    <title>Minerva Autoregistration by demetrios-koziris</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Minerva Autoregistration</h1>
+          <h2>A Chrome Extension making autoregistration possible in Minerva.</h2>
+          <h5 class="breadcrumb">
+            <a href="https://demetrios-koziris.github.io/MinervaAutoregistration"><span>Home</span></a> / 
+          </h5>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="" id="view-on-chrome" class="button" style="text-align:center;"><span>Install Chrome Extension</span></a>
+          <a href="https://github.com/demetrios-koziris/MinervaAutoregistration" id="view-on-github" class="button" style="text-align:center;"><span>View Source on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+
+<div id='course-div'>
+  <h3>
+    Course Information:
+  </h3>
+  <p>
+    <span class='form-label'>
+      Course Name: 
+    </span>
+    <input id='course-name' type="text" name="Name" value="MATH-262"> 
+    (Format: CCCC-000)
+    <br>
+    <span class='form-label'>
+      CRN Codes: 
+    </span>
+    <input id='course-codes' type="text" name="Codes" value="3354 3357"> 
+    (Codes must be associated with above course.)
+    <br>
+    <span class='form-label'> 
+      Term Code: 
+    </span>
+    <input id='course-term' type="text" name="Term" value="201709"> 
+    (Format: YYYYMM)
+  </p>
+  <br>
+</div>
+
+<div id='run-div'>
+  <h3>
+    Run Autoregistration:
+  </h3>
+  <p id="requires-message">
+    If you have installed the Minerva Autoregistration chrome extension (see install link above), a button will appear here.
+  </p>
+  <div style="text-align:center" id='button-div'>  
+    <button type="button" 
+      onclick='document.dispatchEvent(new Event("autoregister"));' 
+      id="mar-run-button" 
+      title="Click to run Minerva Autoregistration" 
+      onmouseover='this.style.border="2px solid #E54944"' 
+      onmouseout='this.style.border="2px solid #5B5B5A"' 
+    > Run Minerva Autoregistration!
+    </button>
+  </div>
+  <br>
+</div>
+
+<div id='results-div'>
+  <h3>
+    Results:
+  </h3>
+  <p id='results-box'>
+  </p>
+</div>
+    
+
+
+        </section>
+
+        <footer>
+          Minerva Autoregistration is maintained by <a href="https://github.com/demetrios-koziris">demetrios-koziris</a><br>
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>

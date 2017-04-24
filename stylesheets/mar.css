@@ -1,0 +1,39 @@
+#mar-run-button {
+	width: 100% !important;
+	height: 50px;
+	max-width: 400px;
+	padding: 10px 4px 10px 10px !important;
+	margin: 10px 0px !important;
+	border: 2px solid #5B5B5A;
+	border-radius: 35px !important;
+	background: #C5C5C5;
+	box-shadow: 3px 3px 5px #dddddd !important;
+	font-family: Helvetica;
+	font-size: 18px;
+	font-weight: bold;
+	display: none;
+}
+
+.form-label {
+	display: inline-block;
+	width: 120px;
+}
+
+
+#view-on-github span {
+  background: transparent url(../images/octocat-icon.png) 28px 50% no-repeat;
+}
+#view-on-github {
+  margin-right: 0;
+}
+
+#view-on-chrome span {
+  background: transparent url(../images/chrome-web-store-icon.png) 28px 50% no-repeat;
+}
+#view-on-chrome {
+  margin-right: 10px;
+}
+
+a.button {
+	width: 374px
+}
