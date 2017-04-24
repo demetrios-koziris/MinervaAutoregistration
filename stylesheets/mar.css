@@ -38,6 +38,6 @@ a.button {
 	width: 374px
 }
 
-/*#timer-label,#timer-value,#results-div {
+#timer-label,#timer-value,#results-div {
 	display: none;
-}*/
+}
