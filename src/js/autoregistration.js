@@ -7,13 +7,15 @@ let devMode = !('update_url' in chrome.runtime.getManifest());
 let logForDebug = ( devMode ? console.log.bind(window.console) : function(){} );
 logForDebug("Minerva Autoregistration Debug mode is ON");
 
+var notpermittedMessage = 'Minerva indicates that you are not permitted to register at this time or that this term is not available for registration processing. Please check Minerva to verify this.';
 var notloggedinMessage = 'You must be already signed in to Minvera in order to use this feature. Please sign in and then return to this page.';
 var defaultErrorMessage = 'Minerva Autoregistration encountered an error while trying to run.';
 var courseParsingError = 'McGill Autoregistation encountered an error while trying to parse the submitted course information. Please make sure you are following the correct format.';
 var initializationError = 'McGill Autoregistation encountered an error trying to find this course in Minerva. The CRN codes may not be associated with this course, the course or the CRN codes may not exist, or there may be some other error.';
 var courseRegistrationError = 'McGill Autoregistation encountered an error while trying to register you for this course.';
+var crnMaxMessage = 'There is a maximum of 10 CRN codes that can be submitted in one registration. McGill Enhanced will attempt registration for the first 10 CRN codes detected.';
 var minervaLogin = 'https://horizon.mcgill.ca/pban1/twbkwbis.P_WWWLogin';
-var attemptIntervalTime = 1;
+var attemptIntervalTime = 3;
 var nextAttemptInterval;
 
 if (url.match(/.+demetrios\-koziris\.github\.io\/MinervaAutoregistration/)) {
@@ -248,7 +250,56 @@ function generateWaitForNextAttemptFunction(nextAttemptTime, course, minervaCour
 }
 
 function register(course) {
+	logToResults('Attempting Registration for ' + course.name + ' ' + course.term + ' [' +  course.crns + ']', true);
 
+	const minervaRegister = 'https://horizon.mcgill.ca/pban1/bwskfreg.P_AltPin?term_in=' + course.term;
+	logForDebug(minervaRegister);
+	const xmlRequestInfo = {
+		method: 'GET',
+		action: 'xhttp',
+		url: minervaRegister
+	};
+	console.log(xmlRequestInfo);
+
+	chrome.runtime.sendMessage(xmlRequestInfo, function(data) {
+		try {
+			htmlParser = new DOMParser();
+			htmlDoc = htmlParser.parseFromString(data.responseXML, 'text/html');
+			// logForDebug(htmlDoc);
+
+			infotext = htmlDoc.getElementsByClassName('infotext')[0].innerText.trim(" ");
+			if (infotext.includes('Please select one of the following login methods.')) {
+				throw new MyError('You are no longer logged into Minerva!');
+			}
+			else if (infotext.includes('You are not permitted to register at this time.') ||
+				     infotext.includes('Term not available for Registration processing.')) {
+				redirect(notpermittedMessage, minervaRegister);
+			}
+			else {
+				const crnCodes = course.crns;
+				registrationForm = htmlDoc.getElementsByTagName('form')[1];
+				logForDebug(registrationForm);
+				logForDebug($(registrationForm).serialize().split('&'));
+
+				for (let c = 0; c < crnCodes.length && c < 10; c++) {
+					htmlDoc.getElementById('crn_id'+(c+1)).value = crnCodes[c];
+				}
+				logForDebug(registrationForm);
+				logForDebug($(registrationForm).serialize().split('&'));
+
+				if (crnCodes.length > 10) {
+					alert(crnMaxMessage);
+				}
+				regURL = 'https://horizon.mcgill.ca/pban1/bwckcoms.P_Regs?' + $(registrationForm).serialize() + '&REG_BTN=Submit+Changes';
+				logForDebug(regURL);
+				window.open(regURL, '_blank').focus();
+			}
+		}
+		catch(err) {
+			console.log(err.stack);
+			redirect(courseRegistrationError, minervaRegister);
+		}
+	});
 }
 
 function redirect(message, url) {
