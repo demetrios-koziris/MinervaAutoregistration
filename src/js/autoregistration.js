@@ -42,12 +42,16 @@ if (url.match(/.+demetrios\-koziris\.github\.io\/MinervaAutoregistration/) && !u
 	logForDebug('requires.getAttribute(\'version\'): ' + requires.getAttribute('version'));	
 	let currentVersion = chrome.runtime.getManifest().version;
 	logForDebug('currentVersion: ' + currentVersion);	
+	logForDebug(cmpVersions(currentVersion, requires.getAttribute('version')));
 
-	if(requires.getAttribute('version') > currentVersion) {
+	if(cmpVersions(requires.getAttribute('version'), currentVersion) > 0) {
 		requires.innerHTML = '<h2>Requires version '+ requires.getAttribute('version') +'</h2><p>You have Minerva Autoregistration version '+ currentVersion +' installed. To update, please go to your extension settings page (chrome://extensions/) or go (Chrome Menu -> Settings -> Extensions), check the Developer mode box in the top right-hand corner, and then click the \'Update extensions now\' button (<a href="https://www.howtogeek.com/64525/how-to-manually-force-google-chrome-to-update-extensions/">Update Instructions Here</a>).</p><div style="text-align:center"><img src="https://www.howtogeek.com/wp-content/uploads/2016/09/dev-mode-2-1.png"></div>';
 	}
 	else {
 		requires.style.display = 'none';
+		let logo = document.getElementById('logo-div');
+		logo.style.opacity = '0.1';
+		document.getElementById('main_content').append(logo);
 	
 		populateInputWithURLParams();
 	
@@ -383,7 +387,7 @@ function setRunButtonToReload() {
 	}
 
 	let runButton = document.getElementById('mar-run-button');
-	runButton.style.background = '#db8e8e';
+	runButton.className += ' reset-mode'; 
 	runButton.innerText = 'Reset Minerva Autoregistration';
 	runButton.title = 'Click to stop/reset Minerva Autoregistration.';
 	runButton.setAttribute('onclick', 'location.href="' + newURL + '"');
@@ -469,4 +473,20 @@ function getUrlVars() {
          }
 
      return vars;
+}
+
+function cmpVersions (a, b) {
+    var i, diff;
+    var regExStrip0 = /(\.0+)+$/;
+    var segmentsA = a.replace(regExStrip0, '').split('.');
+    var segmentsB = b.replace(regExStrip0, '').split('.');
+    var l = Math.min(segmentsA.length, segmentsB.length);
+
+    for (i = 0; i < l; i++) {
+        diff = parseInt(segmentsA[i], 10) - parseInt(segmentsB[i], 10);
+        if (diff) {
+            return diff;
+        }
+    }
+    return segmentsA.length - segmentsB.length;
 }
