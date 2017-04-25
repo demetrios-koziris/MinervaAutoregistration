@@ -2,7 +2,7 @@
   "name": "Minerva Autoregistration",
   "author": "kozirisdev",
   "manifest_version": 2,
-  "version": "0.6",
+  "version": "1.0.1",
   "description": "A Chrome Extension for Minerva Autoregistration functionality.",
   "permissions" : [
     "declarativeContent",
@@ -26,7 +26,8 @@
     {
       "matches" : [
         "*://horizon.mcgill.ca/*", 
-        "*://demetrios-koziris.github.io/*"
+        "*://demetrios-koziris.github.io/*",
+        "file:///C:/Users/Demetrios/GitHub/MARpage/MinervaAutoregistration/index.html"
       ],
       "js" : [ "lib/jquery-1.11.2.min.js", "js/autoregistration.js" ]
     }
