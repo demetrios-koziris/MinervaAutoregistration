@@ -109,7 +109,7 @@ function checkCRNsInMinerva(course, minervaCourseURL) {
 				logForDebug(minervaCRNs);
 
 				if (!isSubSet(new Set(course.crns), new Set(minervaCRNs))) {
-					throw new MyError('Submitted CRNs [' + course.crns + '] do not match those found in Minerva for course ' + course.name + '.');
+					throw new MyError('Submitted CRNs [' + course.crns + '] do not match those found in Minerva for course ' + course.name + ': [' + minervaCRNs + ']');
 				}
 				else {
 					initializeAutoRegistration(course, minervaCourseURL);
