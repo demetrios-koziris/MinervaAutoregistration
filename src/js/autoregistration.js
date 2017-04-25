@@ -34,8 +34,8 @@ var minervaLogin = 'https://horizon.mcgill.ca/pban1/twbkwbis.P_WWWLogin';
 var attemptIntervalTime = 5;
 var nextAttemptInterval;
 
-if (url.match(/.+demetrios\-koziris\.github\.io\/MinervaAutoregistration/) ||
-	url.match(/file\:\/\/\/C\:\/Users\/Demetrios\/GitHub\/MARpage\/MinervaAutoregistration/)) {
+if (url.match(/.+demetrios\-koziris\.github\.io\/MinervaAutoregistration/) && !url.match(/.+demetrios\-koziris\.github\.io\/MinervaAutoregistration\/updating/)||
+	url.match(/file\:\/\/\/C\:\/Users\/Demetrios\/GitHub\/MARpage\/MinervaAutoregistration/) && !url.match(/file\:\/\/\/C\:\/Users\/Demetrios\/GitHub\/MARpage\/MinervaAutoregistration\/updating/)) {
 
 	let requires = document.getElementById('requires-message');
 	logForDebug('requires.getAttribute(\'version\'): ' + requires.getAttribute('version'));	
@@ -43,7 +43,7 @@ if (url.match(/.+demetrios\-koziris\.github\.io\/MinervaAutoregistration/) ||
 	logForDebug('currentVersion: ' + currentVersion);	
 
 	if(requires.getAttribute('version') > currentVersion) {
-		requires.innerHTML = '<h2>Requires version '+ requires.getAttribute('version') +'</h3><p>You have Minerva Autoregistration version '+ currentVersion +' installed. Please go to your extension settings page (chrome://extensions/ or Menu -> Settings -> Extensions), check the Developer mode box on the top right-hand side and then click the \'Update extensions now\' button (<a href="https://www.howtogeek.com/64525/how-to-manually-force-google-chrome-to-update-extensions/">Update Instructions Here</a>).</p><div style="text-align:center"><img src="https://www.howtogeek.com/wp-content/uploads/2016/09/dev-mode-2-1.png"></div>';
+		requires.innerHTML = '<h2>Requires version '+ requires.getAttribute('version') +'</h2><p>You have Minerva Autoregistration version '+ currentVersion +' installed. To update, please go to your extension settings page (chrome://extensions/) or go (Chrome Menu -> Settings -> Extensions), check the Developer mode box in the top right-hand corner, and then click the \'Update extensions now\' button (<a href="https://www.howtogeek.com/64525/how-to-manually-force-google-chrome-to-update-extensions/">Update Instructions Here</a>).</p><div style="text-align:center"><img src="https://www.howtogeek.com/wp-content/uploads/2016/09/dev-mode-2-1.png"></div>';
 	}
 	else {
 		requires.style.display = 'none';
