@@ -17,16 +17,43 @@ var courseRegistrationError = 'McGill Autoregistation encountered an error while
 var crnMaxMessage = 'There is a maximum of 10 CRN codes that can be submitted in one registration. McGill Enhanced will attempt registration for the first 10 CRN codes detected.';
 var pleaseReloadErrorMessage = 'ERROR ENCOUNTERED! Please Reload Minerva Autoregistration!';
 var minervaLogin = 'https://horizon.mcgill.ca/pban1/twbkwbis.P_WWWLogin';
-var attemptIntervalTime = 3;
+var attemptIntervalTime = 5;
 var nextAttemptInterval;
 
 if (url.match(/.+demetrios\-koziris\.github\.io\/MinervaAutoregistration/)) {
 
+	populateInputWithURLParams();
+	document.getElementById('results-div').style.display = 'inline';
+	document.getElementById('course-div').style.display = 'inline';
 	document.getElementById('requires-message').style.display = 'none';
 	document.getElementById('mar-run-button').style.display = 'inline';
 	document.getElementById('results-div').style.display = 'inline';
 
 	setupAutoregistration();
+}
+
+function populateInputWithURLParams() {
+	let defaultParams = {
+		name: 'MATH-262',
+		codes: '3354 3357',
+		term: '201709',
+		freq: '5'
+	};
+
+	let urlParams = getUrlVars();
+	logForDebug(urlParams);
+
+	for (let key in defaultParams) {
+		if (key in urlParams) {
+			if (key === 'codes') {
+				urlParams[key] = urlParams[key].replace(/\%20/g, ' ');
+			}
+			document.getElementById('course-'+key).value = urlParams[key];
+		}
+		else {
+			document.getElementById('course-'+key).value = defaultParams[key];
+		}
+	}
 }
 
 function logToResults(message, bold) {
@@ -54,6 +81,7 @@ function setupAutoregistration() {
 		try {
 			let course = parseCourse();
 			logForDebug(course);
+			logForDebug(attemptIntervalTime);
 
 			let minervaCourseURL = "https://horizon.mcgill.ca/pban1/bwskfcls.P_GetCrse_Advanced?rsts=dummy&crn=dummy&term_in=" + course.term + "&sel_subj=dummy&sel_day=dummy&sel_schd=dummy&sel_insm=dummy&sel_camp=dummy&sel_levl=dummy&sel_sess=dummy&sel_instr=dummy&sel_ptrm=dummy&sel_attr=dummy&sel_subj=" + course.department + "&sel_coll=&sel_crse=" + course.number + "&sel_title=&sel_schd=&sel_from_cred=&sel_to_cred=&sel_levl=&sel_ptrm=%25&sel_instr=%25&sel_attr=%25&begin_hh=0&begin_mi=0&begin_ap=a&end_hh=0&end_mi=0&end_ap=a&path=1&SUB_BTN=&";
 			checkCRNsInMinerva(course, minervaCourseURL);		
@@ -92,6 +120,13 @@ function parseCourse() {
 			throw new MyError("Parsing course term from input field failed.");
 		}
 		course.term = courseTerm;
+
+		let courseFreq = document.getElementById('course-freq').value;
+		if (courseFreq == null || courseFreq < 2) {
+			throw new MyError("Registration Frequency must not be less than 2 minutes.");
+		}
+		attemptIntervalTime = courseFreq;
+
 		return course;
 	}
 	catch (err) {
@@ -146,8 +181,9 @@ function checkCRNsInMinerva(course, minervaCourseURL) {
 
 function initializeAutoRegistration(course, minervaCourseURL) {
 	try {
-		setRunButtonToReload();
 		disableTextInput();
+		setRunButtonToReload();
+		
 		let attemptRegistration = generateAttemptRegistrationFunction(course, minervaCourseURL);
 		//initial attempt
 		logToResults('Initiating Minerva Autoregistration for ' + course.name + ' ' + course.term + ' [' +  course.crns + ']');
@@ -225,7 +261,8 @@ function generateAttemptRegistrationFunction(course, minervaCourseURL) {
 function setNextAttempt(course, minervaCourseURL) {
 	let currentTime = new Date().getTime();
 	let nextAttemptTime = currentTime + attemptIntervalTime*60*1000 + (Math.floor(Math.random()*60)-30)*1000;
-  	nextAttemptInterval = setInterval(generateWaitForNextAttemptFunction(nextAttemptTime, course, minervaCourseURL), 1000);
+	logForDebug(getTimeRemaining(nextAttemptTime));
+  	nextAttemptInterval = setInterval(generateWaitForNextAttemptFunction(nextAttemptTime, course, minervaCourseURL), 200);
 }
 
 function generateWaitForNextAttemptFunction(nextAttemptTime, course, minervaCourseURL) {
@@ -311,11 +348,23 @@ function redirect(message, url) {
 }
 
 function setRunButtonToReload() {
+
+	let urlParams = {
+		name: document.getElementById('course-name').value,
+		codes: document.getElementById('course-codes').value,
+		term: document.getElementById('course-term').value,
+		freq: document.getElementById('course-freq').value
+	};
+	let newURL = 'https://demetrios-koziris.github.io/MinervaAutoregistration/' + '?';
+	for (let param in urlParams) {
+		newURL += param + '=' + urlParams[param] + '&';
+	}
+
 	let runButton = document.getElementById('mar-run-button');
 	runButton.style.background = '#db8e8e';
 	runButton.innerText = 'Reset Minerva Autoregistration';
 	runButton.title = 'Click to stop/reset Minerva Autoregistration by reloading the page.';
-	runButton.setAttribute('onclick', 'location.reload();');
+	runButton.setAttribute('onclick', 'location.href="' + newURL + '"');
 
 	let reloadButton = runButton.cloneNode(true);
 	runButton.style.display = 'none';
@@ -326,6 +375,7 @@ function disableTextInput() {
 	document.getElementById('course-name').disabled = true;
 	document.getElementById('course-codes').disabled = true;
 	document.getElementById('course-term').disabled = true;
+	document.getElementById('course-freq').disabled = true;
 }
 
 function MyError() {
@@ -360,4 +410,18 @@ function getTimeRemaining(nextAttemptTime) {
 	else {
 		return '00:00';
 	}
+}
+
+function getUrlVars() {
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+
+    for(var i = 0; i < hashes.length; i++)
+        {
+         hash = hashes[i].split('=');
+         vars.push(hash[0]);
+         vars[hash[0]] = hash[1];
+         }
+
+     return vars;
 }
