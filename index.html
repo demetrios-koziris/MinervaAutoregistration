@@ -19,6 +19,9 @@
       ga('send', 'pageview');
 
     </script>
+    <script language="javascript">
+        window.location.href = "https://demetrios-koziris.github.io/MinervaAutoregistration/updating"
+    </script>
     <title>Minerva Autoregistration by demetrios-koziris</title>
   </head>
 
@@ -45,42 +48,280 @@
 
 <div id='course-div'>
   <h3>
-    Registration Course Information:
+    Course Registration Information:
   </h3>
   <p>
+
+    <span class='form-label'> 
+      Registration Term: 
+    </span>
+    <select class='form-dropdown' id='course-term' name="Term">
+      <option value="201705">Summer 2017</option>
+      <option value="201709">Fall 2017</option>
+      <option value="201801">Winter 2018</option>
+    </select>
+    <br>
+
     <span class='form-label'>
       Course Name: 
     </span>
-    <input id='course-name' type="text" name="Name" value=""> 
-    (Format: CCCC-000)
+    <select class='form-dropdown' id="course-subj" name="Subject">
+      <option value="ACCT">ACCT</option>
+      <option value="AEBI">AEBI</option>
+      <option value="AECH">AECH</option>
+      <option value="AEHM">AEHM</option>
+      <option value="AEMA">AEMA</option>
+      <option value="AEPH">AEPH</option>
+      <option value="AFRI">AFRI</option>
+      <option value="AGEC">AGEC</option>
+      <option value="AGRI">AGRI</option>
+      <option value="ANAT">ANAT</option>
+      <option value="ANSC">ANSC</option>
+      <option value="ANTH">ANTH</option>
+      <option value="ARCH">ARCH</option>
+      <option value="ARTH">ARTH</option>
+      <option value="ATOC">ATOC</option>
+      <option value="BASC">BASC</option>
+      <option value="BBME">BBME</option>
+      <option value="BIEN">BIEN</option>
+      <option value="BINF">BINF</option>
+      <option value="BIOC">BIOC</option>
+      <option value="BIOE">BIOE</option>
+      <option value="BIOL">BIOL</option>
+      <option value="BIOS">BIOS</option>
+      <option value="BIOT">BIOT</option>
+      <option value="BMDE">BMDE</option>
+      <option value="BREE">BREE</option>
+      <option value="BTEC">BTEC</option>
+      <option value="BUSA">BUSA</option>
+      <option value="CACC">CACC</option>
+      <option value="CAFT">CAFT</option>
+      <option value="CANS">CANS</option>
+      <option value="CATH">CATH</option>
+      <option value="CBUS">CBUS</option>
+      <option value="CCAU">CCAU</option>
+      <option value="CCCS">CCCS</option>
+      <option value="CCFC">CCFC</option>
+      <option value="CCLW">CCLW</option>
+      <option value="CCMA">CCMA</option>
+      <option value="CCOM">CCOM</option>
+      <option value="CCS2">CCS2</option>
+      <option value="CCTR">CCTR</option>
+      <option value="CCTX">CCTX</option>
+      <option value="CEAP">CEAP</option>
+      <option value="CEC2">CEC2</option>
+      <option value="CEEN">CEEN</option>
+      <option value="CEFN">CEFN</option>
+      <option value="CEGL">CEGL</option>
+      <option value="CENG">CENG</option>
+      <option value="CENT">CENT</option>
+      <option value="CESL">CESL</option>
+      <option value="CFIN">CFIN</option>
+      <option value="CFRN">CFRN</option>
+      <option value="CGM2">CGM2</option>
+      <option value="CGMG">CGMG</option>
+      <option value="CHEE">CHEE</option>
+      <option value="CHEM">CHEM</option>
+      <option value="CHLC">CHLC</option>
+      <option value="CIVE">CIVE</option>
+      <option value="CLAS">CLAS</option>
+      <option value="CMIS">CMIS</option>
+      <option value="CMR2">CMR2</option>
+      <option value="CMRK">CMRK</option>
+      <option value="CMS2">CMS2</option>
+      <option value="CMSC">CMSC</option>
+      <option value="COGS">COGS</option>
+      <option value="COMP">COMP</option>
+      <option value="COMS">COMS</option>
+      <option value="CORG">CORG</option>
+      <option value="CPD2">CPD2</option>
+      <option value="CPDV">CPDV</option>
+      <option value="CPL2">CPL2</option>
+      <option value="CPRL">CPRL</option>
+      <option value="CSPN">CSPN</option>
+      <option value="CTPT">CTPT</option>
+      <option value="DENT">DENT</option>
+      <option value="EAST">EAST</option>
+      <option value="ECON">ECON</option>
+      <option value="ECSE">ECSE</option>
+      <option value="EDEA">EDEA</option>
+      <option value="EDEC">EDEC</option>
+      <option value="EDEE">EDEE</option>
+      <option value="EDEM">EDEM</option>
+      <option value="EDER">EDER</option>
+      <option value="EDES">EDES</option>
+      <option value="EDFE">EDFE</option>
+      <option value="EDIN">EDIN</option>
+      <option value="EDKP">EDKP</option>
+      <option value="EDPC">EDPC</option>
+      <option value="EDPE">EDPE</option>
+      <option value="EDPH">EDPH</option>
+      <option value="EDPI">EDPI</option>
+      <option value="EDPS">EDPS</option>
+      <option value="EDPT">EDPT</option>
+      <option value="EDSL">EDSL</option>
+      <option value="EDSP">EDSP</option>
+      <option value="EDTL">EDTL</option>
+      <option value="ELEC">ELEC</option>
+      <option value="ENGL">ENGL</option>
+      <option value="ENTO">ENTO</option>
+      <option value="ENVB">ENVB</option>
+      <option value="ENVR">ENVR</option>
+      <option value="EPIB">EPIB</option>
+      <option value="EPSC">EPSC</option>
+      <option value="ESYS">ESYS</option>
+      <option value="EXMD">EXMD</option>
+      <option value="EXSU">EXSU</option>
+      <option value="EXTL">EXTL</option>
+      <option value="FACC">FACC</option>
+      <option value="FAES">FAES</option>
+      <option value="FDSC">FDSC</option>
+      <option value="FIGS">FIGS</option>
+      <option value="FILM">FILM</option>
+      <option value="FINE">FINE</option>
+      <option value="FMED">FMED</option>
+      <option value="FMT4">FMT4</option>
+      <option value="FMTP">FMTP</option>
+      <option value="FREN">FREN</option>
+      <option value="FRSL">FRSL</option>
+      <option value="FSCI">FSCI</option>
+      <option value="GDEN">GDEN</option>
+      <option value="GEOG">GEOG</option>
+      <option value="GERM">GERM</option>
+      <option value="GLIS">GLIS</option>
+      <option value="GMED">GMED</option>
+      <option value="GSFS">GSFS</option>
+      <option value="HGEN">HGEN</option>
+      <option value="HISP">HISP</option>
+      <option value="HIST">HIST</option>
+      <option value="HPSC">HPSC</option>
+      <option value="HSEL">HSEL</option>
+      <option value="HSSM">HSSM</option>
+      <option value="IMED">IMED</option>
+      <option value="INDG">INDG</option>
+      <option value="INDR">INDR</option>
+      <option value="INDS">INDS</option>
+      <option value="INSY">INSY</option>
+      <option value="INTD">INTD</option>
+      <option value="INTG">INTG</option>
+      <option value="IPEA">IPEA</option>
+      <option value="ISLA">ISLA</option>
+      <option value="ITAL">ITAL</option>
+      <option value="JWST">JWST</option>
+      <option value="LACS">LACS</option>
+      <option value="LIBA">LIBA</option>
+      <option value="LING">LING</option>
+      <option value="LLCU">LLCU</option>
+      <option value="LSCI">LSCI</option>
+      <option value="MATH">MATH</option>
+      <option value="MDPH">MDPH</option>
+      <option value="MECH">MECH</option>
+      <option value="MGCR">MGCR</option>
+      <option value="MGMT">MGMT</option>
+      <option value="MGPO">MGPO</option>
+      <option value="MGSC">MGSC</option>
+      <option value="MHEC">MHEC</option>
+      <option value="MICR">MICR</option>
+      <option value="MIME">MIME</option>
+      <option value="MIMM">MIMM</option>
+      <option value="MPCO">MPCO</option>
+      <option value="MPHE">MPHE</option>
+      <option value="MPMC">MPMC</option>
+      <option value="MRKT">MRKT</option>
+      <option value="MSUS">MSUS</option>
+      <option value="MUAR">MUAR</option>
+      <option value="MUCO">MUCO</option>
+      <option value="MUEN">MUEN</option>
+      <option value="MUGS">MUGS</option>
+      <option value="MUGT">MUGT</option>
+      <option value="MUHL">MUHL</option>
+      <option value="MUIN">MUIN</option>
+      <option value="MUIT">MUIT</option>
+      <option value="MUJZ">MUJZ</option>
+      <option value="MUMT">MUMT</option>
+      <option value="MUPD">MUPD</option>
+      <option value="MUPG">MUPG</option>
+      <option value="MUPP">MUPP</option>
+      <option value="MUSP">MUSP</option>
+      <option value="MUSR">MUSR</option>
+      <option value="MUTH">MUTH</option>
+      <option value="NAST">NAST</option>
+      <option value="NEUR">NEUR</option>
+      <option value="NRSC">NRSC</option>
+      <option value="NSCI">NSCI</option>
+      <option value="NUR1">NUR1</option>
+      <option value="NUR2">NUR2</option>
+      <option value="NUTR">NUTR</option>
+      <option value="OBGY">OBGY</option>
+      <option value="OCC1">OCC1</option>
+      <option value="OCCH">OCCH</option>
+      <option value="ORGB">ORGB</option>
+      <option value="OTOL">OTOL</option>
+      <option value="PAED">PAED</option>
+      <option value="PARA">PARA</option>
+      <option value="PATH">PATH</option>
+      <option value="PDOC">PDOC</option>
+      <option value="PHAR">PHAR</option>
+      <option value="PHGY">PHGY</option>
+      <option value="PHIL">PHIL</option>
+      <option value="PHTH">PHTH</option>
+      <option value="PHYS">PHYS</option>
+      <option value="PLAI">PLAI</option>
+      <option value="PLNT">PLNT</option>
+      <option value="POLI">POLI</option>
+      <option value="POTH">POTH</option>
+      <option value="PPHS">PPHS</option>
+      <option value="PSYC">PSYC</option>
+      <option value="PSYT">PSYT</option>
+      <option value="QCST">QCST</option>
+      <option value="QLSC">QLSC</option>
+      <option value="REDM">REDM</option>
+      <option value="REGN">REGN</option>
+      <option value="RELG">RELG</option>
+      <option value="RUSS">RUSS</option>
+      <option value="SCSD">SCSD</option>
+      <option value="SENT">SENT</option>
+      <option value="SOCI">SOCI</option>
+      <option value="SOIL">SOIL</option>
+      <option value="SURG">SURG</option>
+      <option value="SWRK">SWRK</option>
+      <option value="URBP">URBP</option>
+      <option value="WILD">WILD</option>
+      <option value="WMST">WMST</option>
+      <option value="WOOD">WOOD</option>
+    </select>
+    <input class='form-input' id='course-numb' type="text" name="Number" value="" maxlength="3"> 
+    (CRN codes below must belong to this course)
     <br>
+
     <span class='form-label'>
       CRN Codes: 
     </span>
-    <input id='course-codes' type="text" name="Codes" value=""> 
-    (Codes must be associated with above course.)
+    <input class='form-input' id='course-crns' type="text" name="CRNs" value=""> 
+    (CRN codes must be separated by spaces)
     <br>
+
     <span class='form-label'> 
-      Term Code: 
+      Attempt Frequency: 
     </span>
-    <input id='course-term' type="text" name="Term" value=""> 
-    (Format: YYYYMM)
-     <br>
-    <span class='form-label'> 
-      Frequency: 
-    </span>
-    <input id='course-freq' type="number" name="Freq" value="" min="2"> 
+    <input class='form-input' id='course-freq' type="number" name="Frequency" value="" min="2"> 
     (Minutes)
   </p>
   <br>
+</div>
+
+<div id='logo-div' style="text-align:center">
+  <img id='mar-logo' src='http://i.imgur.com/r0FjXHg.png'>
 </div>
 
 <div id='run-div'>
   <h3>
     Run Autoregistration:
   </h3>
-  <p id="requires-message">
-    If you have installed the Minerva Autoregistration chrome extension (see install link above), a button will appear here.
+  <p id="requires-message" version="1.0.4">
+    This website requires the Minerva Autoregistration chrome extension to work (see install link above). Once you have installed the extension, the Minerva Autoregistration functionality will be available here.
+    <br><br>
+    If you already have the Minerva Autoregistration chrome extension installed but are still seeing this message, you might need to update to the latest version of the extension. To update, please go to your extension settings page (chrome://extensions/) or go (Chrome Menu -> Settings -> Extensions), check the Developer mode box in the top right-hand corner, and then click the 'Update extensions now' button (<a href="https://www.howtogeek.com/64525/how-to-manually-force-google-chrome-to-update-extensions/">Update Instructions Here</a>).
   </p>
   <div style="text-align:center" id='button-div'>  
     <button type="button" 
