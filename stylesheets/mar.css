@@ -11,7 +11,6 @@
 	font-family: Helvetica;
 	font-size: 18px;
 	font-weight: bold;
-	display: none;
 }
 
 .form-label {
@@ -38,6 +37,6 @@ a.button {
 	width: 374px
 }
 
-#timer-label,#timer-value,#results-div {
+#course-div,#mar-run-button,#results-div,#timer-label,#timer-value {
 	display: none;
 }
