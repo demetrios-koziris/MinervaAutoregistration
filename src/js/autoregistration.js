@@ -124,7 +124,7 @@ function parseCourse() {
 		course.number = courseNumber;
 
 		let courseCRNs = document.getElementById('course-codes').value.split(' ');
-		if (courseCRNs.some(x => x == null || !(x.match(/^[0-9]{3,4}$/)))) {
+		if (courseCRNs.some(x => x == null || !(x.match(/^[0-9]{3,5}$/)))) {
 			throw new MyError("Parsing course CRNs from input field failed.");
 		}
 		course.crns = courseCRNs;
