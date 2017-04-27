@@ -6,7 +6,7 @@
 	margin: 10px 0px;
 	border: 2px solid #5B5B5A;
 	border-radius: 35px;
-	background: #C5C5C5 url(http://i.imgur.com/r0FjXHg.png) no-repeat 6% 44%;
+	background: #C5C5C5 url(../images/mar-128.png) no-repeat 6% 44%;
 	background-size: 40px 40px;
 	box-shadow: 3px 3px 5px #dddddd;
 	font-family: Helvetica;
@@ -15,7 +15,7 @@
 }
 
 #mar-run-button.reset-mode {
- background: #DB8E8E url(http://i.imgur.com/NGmVuY2.png) no-repeat 6% 44%;
+ background: #DB8E8E url(../images/mar-inv-128.png) no-repeat 6% 44%;
  background-size: 40px 40px;
 }
 
