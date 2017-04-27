@@ -31,7 +31,7 @@ var crnMaxMessage = 'There is a maximum of 10 CRN codes that can be submitted in
 var pleaseReloadErrorMessage = 'ERROR ENCOUNTERED! Please Reload Minerva Autoregistration!';
 var minervaLogin = 'https://horizon.mcgill.ca/pban1/twbkwbis.P_WWWLogin';
 
-var attemptIntervalTime = 5;
+var attemptIntervalTime = 10;
 var nextAttemptInterval;
 
 
@@ -181,7 +181,7 @@ function generateAttemptRegistrationFunction(course, minervaCourseURL) {
 					seatsMessage = "Checking seat availability in Minerva:";
 					for (let i = 0; i < course.crns.length; i++) {
 						let seats = minervaSeats[course.crns[i]];
-						if ( seats === '0') {
+						if ( seats <= '0') {
 							zeroSeatCRNs.push(course.crns[i]);
 							seatsForAllCRNs = false;
 						}
@@ -302,7 +302,7 @@ function populateInputWithURLParams() {
 		subj: 'MATH',
 		numb: '262',
 		crns: '3354 3357',
-		freq: '5'
+		freq: '10'
 	};
 
 	let urlParams = getUrlVars();
@@ -345,7 +345,7 @@ function parseCourse() {
 		}
 
 		let courseFreq = document.getElementById('course-freq').value;
-		if (courseFreq == null || courseFreq < 2) {
+		if (courseFreq == null || courseFreq < 3) {
 			throw new MyError("Registration Frequency must not be less than 2 minutes.");
 		}
 
