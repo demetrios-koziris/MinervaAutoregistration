@@ -53,7 +53,7 @@
   <p>
 
     <span class='form-label'> 
-      Registration Term: 
+      Registration Term : 
     </span>
     <select class='form-dropdown' id='course-term' name="Term">
       <option value="201705">Summer 2017</option>
@@ -63,7 +63,7 @@
     <br>
 
     <span class='form-label'>
-      Course Name: 
+      Course Name : 
     </span>
     <select class='form-dropdown' id="course-subj" name="Subject">
       <option value="ACCT">ACCT</option>
@@ -295,19 +295,21 @@
     <br>
 
     <span class='form-label'>
-      CRN Codes: 
+      CRN Codes : 
     </span>
     <input class='form-input' id='course-crns' type="text" name="CRNs" value=""> 
     (CRN codes must be separated by spaces)
     <br>
 
     <span class='form-label'> 
-      Attempt Frequency: 
+      Attempt Frequency* : 
     </span>
-    <input class='form-input' id='course-freq' type="number" name="Frequency" value="" min="3"> 
+    <input class='form-input' id='course-freq' type="number" name="Frequency" value="" min="5"> 
     (Minutes)
   </p>
-  <br>
+  <p>
+    * Note that Minerva Autoregistration will apply a proportional offset to this frequency value on every attempt.
+  </p>
 </div>
 
 <div id='logo-div' style="text-align:center">
