@@ -24,7 +24,7 @@ logForDebug("Minerva Autoregistration Debug mode is ON");
 var notpermittedMessage = 'Minerva indicates that you are not permitted to register at this time or that this term is not available for registration processing. Please check Minerva to verify this.';
 var notloggedinMessage = 'You must be already signed in to Minvera in order to use this feature. Please sign in and then return to this page.';
 var defaultErrorMessage = 'Minerva Autoregistration encountered an error while trying to run.';
-var courseParsingError = 'McGill Autoregistation encountered an error while trying to parse the submitted course information. Please make sure you are following the correct format.';
+var courseParsingError = 'McGill Autoregistation encountered an error while trying to parse the submitted course information. Please make sure you are following the correct format and rules.';
 var initializationError = 'McGill Autoregistation encountered an error trying to find this course in Minerva. The CRN codes may not be associated with this course, the course or the CRN codes may not exist, or there may be some other error.';
 var courseRegistrationError = 'McGill Autoregistation encountered an error while trying to register you for this course.';
 var crnMaxMessage = 'There is a maximum of 10 CRN codes that can be submitted in one registration. McGill Enhanced will attempt registration for the first 10 CRN codes detected.';
@@ -32,6 +32,7 @@ var pleaseReloadErrorMessage = 'ERROR ENCOUNTERED! Please Reload Minerva Autoreg
 var minervaLogin = 'https://horizon.mcgill.ca/pban1/twbkwbis.P_WWWLogin';
 
 var attemptIntervalTime = 15;
+var minFreq = 5;
 var nextAttemptInterval;
 
 
@@ -348,8 +349,8 @@ function parseCourse() {
 		}
 
 		let courseFreq = document.getElementById('course-freq').value;
-		if (courseFreq == null || courseFreq < 5) {
-			throw new MyError("Registration Frequency must not be less than 2 minutes.");
+		if (courseFreq == null || courseFreq < minFreq) {
+			throw new MyError('Registration Frequency must not be less than ' + minFreq + ' minutes.');
 		}
 
 		attemptIntervalTime = courseFreq;
