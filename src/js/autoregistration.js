@@ -31,7 +31,7 @@ var crnMaxMessage = 'There is a maximum of 10 CRN codes that can be submitted in
 var pleaseReloadErrorMessage = 'ERROR ENCOUNTERED! Please Reload Minerva Autoregistration!';
 var minervaLogin = 'https://horizon.mcgill.ca/pban1/twbkwbis.P_WWWLogin';
 
-var attemptIntervalTime = 10;
+var attemptIntervalTime = 15;
 var nextAttemptInterval;
 
 
@@ -211,8 +211,11 @@ function generateAttemptRegistrationFunction(course, minervaCourseURL) {
 
 function setNextAttempt(course, minervaCourseURL) {
 	let currentTime = new Date().getTime();
-	let nextAttemptTime = currentTime + attemptIntervalTime*60*1000 + (Math.floor(Math.random()*60)-30)*1000;
+	let offsetSeconds = (Math.floor(Math.random()*2*(attemptIntervalTime*10))-(attemptIntervalTime*10))
+	let nextAttemptTime = currentTime + (attemptIntervalTime*60)*1000 + offsetSeconds*1000;
+	logForDebug(offsetSeconds);
 	logForDebug(getTimeRemaining(nextAttemptTime));
+
   	nextAttemptInterval = setInterval(generateWaitForNextAttemptFunction(nextAttemptTime, course, minervaCourseURL), 200);
 }
 
@@ -302,7 +305,7 @@ function populateInputWithURLParams() {
 		subj: 'MATH',
 		numb: '262',
 		crns: '3354 3357',
-		freq: '10'
+		freq: '15'
 	};
 
 	let urlParams = getUrlVars();
@@ -345,7 +348,7 @@ function parseCourse() {
 		}
 
 		let courseFreq = document.getElementById('course-freq').value;
-		if (courseFreq == null || courseFreq < 3) {
+		if (courseFreq == null || courseFreq < 5) {
 			throw new MyError("Registration Frequency must not be less than 2 minutes.");
 		}
 

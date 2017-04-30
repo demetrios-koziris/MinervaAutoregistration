@@ -2,7 +2,7 @@
   "name": "Minerva Autoregistration",
   "author": "kozirisdev",
   "manifest_version": 2,
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A Chrome Extension for Minerva Autoregistration functionality.",
   "permissions" : [
     "declarativeContent",
