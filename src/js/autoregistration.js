@@ -98,8 +98,7 @@ function checkCRNsInMinerva(course, minervaCourseURL) {
 			htmlDoc = htmlParser.parseFromString(data.responseXML, 'text/html');
 			logForDebug(htmlDoc);
 
-			infotext = htmlDoc.getElementsByClassName('infotext')[0].innerText.trim(" ");
-			if (infotext.includes('Please select one of the following login methods.')) {
+			if (htmlDoc.getElementById('mcg_id_submit')) {
 				redirect(notloggedinMessage, minervaLogin);
 			}
 			else {
@@ -161,8 +160,7 @@ function generateAttemptRegistrationFunction(course, minervaCourseURL) {
 				htmlDoc = htmlParser.parseFromString(data.responseXML, 'text/html');
 				// logForDebug(htmlDoc);
 
-				infotext = htmlDoc.getElementsByClassName('infotext')[0].innerText.trim(" ");
-				if (infotext.includes('Please select one of the following login methods.')) {
+				if (htmlDoc.getElementById('mcg_id_submit')) {
 					throw new MyError('You are no longer logged into Minerva!');
 				}
 				else {
