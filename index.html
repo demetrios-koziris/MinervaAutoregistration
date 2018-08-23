@@ -296,20 +296,22 @@
     <br>
 
     <span class='form-label'>
-      CRN Codes : 
+      CRN Codes* : 
     </span>
     <input class='form-input' id='course-crns' type="text" name="CRNs" value=""> 
     (CRN codes must be separated by spaces)
     <br>
 
     <span class='form-label'> 
-      Attempt Frequency* : 
+      Attempt Frequency** : 
     </span>
     <input class='form-input' id='course-freq' type="number" name="Frequency" value="" min="5"> 
     Minutes (minimum of 5)
   </p>
   <p>
-    * Note that Minerva Autoregistration will apply a proportional offset to this frequency value on every attempt.
+    * Note that Minerva Autoregistration will only attempt registration when all CRNs have seats available.
+    <br>
+    ** Note that Minerva Autoregistration will apply a proportional offset to this frequency value on every attempt.
   </p>
 </div>
 
