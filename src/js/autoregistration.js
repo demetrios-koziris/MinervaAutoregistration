@@ -300,10 +300,10 @@ function register(course) {
 
 function populateInputWithURLParams() {
 	let defaultParams = {
-		term: '201809',
+		term: '201901',
 		subj: 'MATH',
 		numb: '262',
-		crns: '3354 3357',
+		crns: '3009 12046',
 		freq: '15'
 	};
 
