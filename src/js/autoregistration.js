@@ -260,11 +260,12 @@ function register(course) {
 			// logForDebug(htmlDoc);
 
 			infotext = htmlDoc.getElementsByClassName('infotext')[0].innerText.trim(" ");
-			if (infotext.includes('Please select one of the following login methods.')) {
-				throw new MyError('You are no longer logged into Minerva!');
+			if (infotext.includes('Please select one of the following login methods')) {
+				throw new MyError('You are no longer logged into Minerva');
 			}
-			else if (infotext.includes('You are not permitted to register at this time.') ||
-				     infotext.includes('Term not available for Registration processing.')) {
+			else if (infotext.includes('You are not permitted to register at this time') ||
+				     infotext.includes('You are not currently allowed to register') ||
+				     infotext.includes('Term not available for Registration processing')) {
 				throw new MyError(notpermittedMessage);
 			}
 			else {
@@ -300,10 +301,10 @@ function register(course) {
 
 function populateInputWithURLParams() {
 	let defaultParams = {
-		term: '201901',
+		term: '201905',
 		subj: 'MATH',
 		numb: '262',
-		crns: '3009 12046',
+		crns: '180 181',
 		freq: '15'
 	};
 
