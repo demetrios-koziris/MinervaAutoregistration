@@ -24,6 +24,7 @@ logForDebug("Minerva Autoregistration Debug mode is ON");
 var notpermittedMessage = 'Minerva indicates that you are not permitted to register at this time or that this term is not available for registration processing. Please check Minerva to verify this.';
 var notloggedinMessage = 'You must be already signed in to Minvera in order to use this feature. Please sign in and then return to this page.';
 var defaultErrorMessage = 'Minerva Autoregistration encountered an error while trying to run.';
+var rateLimitingMessage = 'Minerva appears to be rate limiting automated request. Increasing the time between attempts.';
 var courseParsingError = 'McGill Autoregistation encountered an error while trying to parse the submitted course information. Please make sure you are following the correct format and rules.';
 var initializationError = 'McGill Autoregistation encountered an error trying to find this course in Minerva. The CRN codes may not be associated with this course, the course or the CRN codes may not exist, or there may be some other error.';
 var courseRegistrationError = 'McGill Autoregistation encountered an error while trying to register you for this course.';
@@ -162,6 +163,11 @@ function generateAttemptRegistrationFunction(course, minervaCourseURL) {
 
 				if (htmlDoc.getElementById('mcg_id_submit')) {
 					throw new MyError('You are no longer logged into Minerva!');
+				}
+				if (htmlDoc.body.innerText.includes("Please enable JavaScript to view the page content")) {
+					logToResults(rateLimitingMessage);
+					attemptIntervalTime *= 2;
+					setNextAttempt(course, minervaCourseURL);
 				}
 				else {
 					let rows = htmlDoc.getElementsByClassName('datadisplaytable')[0].rows;
